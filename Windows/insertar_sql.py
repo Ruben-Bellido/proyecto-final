@@ -2,7 +2,7 @@ import mysql.connector
 
 # Conexión a la base de datos
 conexion = mysql.connector.connect(
-    host="localhosr",
+    host="localhost",
     user="root",
     password="root",
     database="tiempo"

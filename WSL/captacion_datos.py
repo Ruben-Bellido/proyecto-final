@@ -1,12 +1,11 @@
 import requests
 import json
-import 
 
 def celsius_to_kelvin(celsius):
-    return celsius + 273.15
+    return celsius - 273.15
 
 def kelvin_to_celsius(kelvin):
-    return kelvin - 273.15
+    return kelvin + 273.15
 
 # 1. Hacer consulta
 lat = 44.34
@@ -27,7 +26,7 @@ if response.status_code == 200:
     main = datos["main"]
     t_min = celsius_to_kelvin(main["temp_min"])
     t_max = celsius_to_kelvin(main["temp_max"])
-    print("Temperaturas de {}: minima {}, maxima {}".format(ciudad, t_min,t_max))
+    print("Temperaturas de {}: minima {}, maxima {}".format(ciudad, t_min, t_max))
 
     resumen = {
         'maxima': t_max,
@@ -37,3 +36,4 @@ if response.status_code == 200:
         'longitud': lon
     }
 
+    print(resumen)

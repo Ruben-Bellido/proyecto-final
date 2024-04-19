@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree as et
@@ -98,16 +98,29 @@ while True:
 
         # Agregar los datos al objeto JSON
         json_data = {
-            "product name": product_name,
+            "name": product_name,
             "price": product_price,
             "rating": product_rating,
             "reviews": product_reviews,
             "url": url,
-            "timestamp": str(datetime.now())
+            "timestamp": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
         }
 
-        # Envío
-        print(json_data)
+        # Debug para visualizar los datos
+        print(f"Enviando datos: {json_data}")
+        
+        try:
+            # URL del endpoint FastAPI
+            url = "http://127.0.0.1:8000/products"
+            # Envía la petición POST con los datos
+            response = requests.post(url, json=json_data)
+            # Debug para comprobar el estado de la petición
+            if response.status_code == 200:
+                print("Petición POST exitosa")
+            else:
+                print(f"Error en la petición POST. Código de estado: {response.status_code}")
+        except requests.RequestException as e:
+            print(f"Error en la conexión: {e}")
 
     # Introducir un retraso de 1 min
     time.sleep(60)

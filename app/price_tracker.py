@@ -13,7 +13,10 @@ header = {
 }
 
 # Lista de URLs de productos en Amazon
-bucket_list = ['https://www.amazon.es/HP-15-fd0042ns-Ordenador-portátil-Graphics/dp/B0CFBGWVQD/ref=sr_1_4?dib=eyJ2IjoiMSJ9.aoMhGcee8VYmgN3D0U2sTAqtFmpV83m0jdH6lkzhsI6oPWLraNdPXElQ1tFkt8lard6Fj0KKREb4PzAtGwtXQJNRfN9oNldoc6N1mjYSHDWIVcA3RVW-X7JIG49CmXXsetu4R-RZw-4Ds8_vJ5VLLErHwRSxLzZMs4qkUIV7W-6h432NypNPo6cWpcaaUxum9c6-uSKtsPxbB8wX1eUB2Wq2WstpRLjoXu2YWVCUMf0v-01oAbVDA1bQKgqlN4PfBQ88kfLecQieqlcPEmLpgRdqr0IxGtHDlxA608kr6Zk.DPLrA6WevfsiJ3BGsxTOnyC4w8H1-nO2TJ-DMu2dVYY&dib_tag=se&qid=1712414913&s=computers&sr=1-4&ufe=app_do%3Aamzn1.fos.0fd54328-1d46-4534-bd0f-16141b40bb5b']
+bucket_list = ['https://www.amazon.es/Apple-2022-Pulgadas-Wi-Fi-64-GB/dp/B0BJMXBJJJ/ref=sr_1_7',
+               'https://www.amazon.es/2022-Apple-Ordenador-Portátil-MacBook/dp/B0B3CV8XSG/ref=zg_bs_g_938008031_d_sccl_26/259-7954607-9722901?psc=1',
+               'https://www.amazon.es/fire-tv-stick-con-mando-por-voz-alexa/dp/B08C1KN5J2/ref=zg_bs_g_electronics_d_sccl_1/259-7954607-9722901?psc=1'
+               ]
 
 # Registrar urls mediante inputs
 while True:
@@ -37,7 +40,7 @@ def get_product_price(dom):
         # Extraer el precio del producto utilizando XPath
         price = dom.xpath('//span[@class="a-offscreen"]/text()')[0]
         # Parsear el precio a formato float
-        price = price.replace(',', '.').replace('€', '').replace('.00', '')
+        price = price.replace('.', '').replace(',', '.').replace('.00', '').replace('€', '')
         return float(price)
     except Exception:
         price = 'Not Available'
@@ -72,7 +75,7 @@ def get_product_reviews(dom):
         # Extraer las valoraciones del producto utilizando XPath
         reviews = dom.xpath('//span[@id="acrCustomerReviewText"]/text()')[0]
         # Obtener únicamente el valor numérico
-        reviews = reviews.replace(' valoraciones', '')
+        reviews = reviews.replace(' valoraciones', '').replace('.', '')
         return int(reviews)
     except Exception:
         reviews = 'Not Available'
@@ -123,4 +126,4 @@ while True:
             print(f"Error en la conexión: {e}")
 
     # Introducir un retraso de 1 min
-    time.sleep(60)
+    time.sleep(10)

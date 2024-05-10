@@ -1,4 +1,3 @@
-
 version: '3'
 
 services:
@@ -6,17 +5,18 @@ services:
     #image: mageai/mageai:latest
     command: mage start ${PROJECT_NAME}
     build:
-    context: .
-    dockerfile: Dockerfile
+      context: mage
+      dockerfile: Dockerfile
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
       REQUIRE_USER_AUTHENTICATION: "1"
     ports:
       - 6789:6789
-    network_mode: "host"
     volumes:
       - .:/home/src/
     restart: on-failure:5
+    networks:
+      - monitoring_network
 
   node-red:
     image: nodered/node-red:3.1.8
@@ -27,25 +27,18 @@ services:
       - "1880:1880"
     volumes:
       - ./data:/data
-grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./grafana:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
     networks:
       - monitoring_network
 
-  fastapi:
-    image: ${FASTAPI_IMAGE} 
-    container_name: fastapi
-    ports:
-      - "8000:8000"
-    networks:
-      - monitoring_network
+  # fastapi:
+  #   build:
+  #     context: fastapi
+  #     dockerfile: Dockerfile
+  #   container_name: fastapi
+  #   ports:
+  #     - "8000:8000"
+  #   networks:
+  #     - monitoring_network
 
 networks:
   monitoring_network:

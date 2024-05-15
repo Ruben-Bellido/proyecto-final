@@ -1,8 +1,11 @@
-FROM tiangolo/uvicorn-gunicorn:python3.10
+# Usamos una imagen base de Python
+FROM python:3.10
 
-LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
+# Definimos el directorio de trabajo en el contenedor
+WORKDIR /fastapi
 
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
+# Copiamos el archivo requirements.txt al contenedor
+COPY requirements.txt .
 
-COPY ./app /app
+# Instalamos las dependencias desde el archivo requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt

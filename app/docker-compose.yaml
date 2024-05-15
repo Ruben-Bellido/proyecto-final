@@ -19,26 +19,26 @@ services:
       - monitoring_network
 
   node-red:
-    image: nodered/node-red:3.1.8
+    image: nodered/node-red:latest
     container_name: node-red
     environment:
       - TZ=Europe/London
     ports:
       - "1880:1880"
     volumes:
-      - ./node_red:/data
+      - ./node_red/data:/data
     networks:
       - monitoring_network
 
-  # fastapi:
-  #   build:
-  #     context: fastapi
-  #     dockerfile: Dockerfile
-  #   container_name: fastapi
-  #   ports:
-  #     - "8000:8000"
-  #   networks:
-  #     - monitoring_network
+  fastapi:
+    build:
+      context: fastapi
+      dockerfile: Dockerfile
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - monitoring_network
 
 networks:
   monitoring_network:

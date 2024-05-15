@@ -26,7 +26,7 @@ services:
     ports:
       - "1880:1880"
     volumes:
-      - ./data:/data
+      - ./node_red:/data
     networks:
       - monitoring_network
 

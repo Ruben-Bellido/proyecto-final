@@ -1,5 +1,11 @@
 # proyecto-final
 
+## Pasos seguidos
+- Levantar docker-compose
+- Acceder a Mage.ai con las claves de acceso premeditadas, la [documentación](https://docs.mage.ai/production/authentication/overview)
+	usuario: admin@admin.com
+    contraseña: admin
+
 ## Librerías
 Para la libreria de MySQL usar: 
     ```bash 

@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  magic:
+    #image: mageai/mageai:latest
+    command: mage start ${PROJECT_NAME}
+    build:
+      context: mage
+      dockerfile: Dockerfile
+    environment:
+      USER_CODE_PATH: /home/src/${PROJECT_NAME}
+      REQUIRE_USER_AUTHENTICATION: "1"
+    ports:
+      - 6789:6789
+    volumes:
+      - ./mage:/home/src/
+    restart: on-failure:5
+    networks:
+      - monitoring_network
+
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    environment:
+      - TZ=Europe/London
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./node_red/data:/data
+    networks:
+      - monitoring_network
+
+  fastapi:
+    build:
+      context: fastapi
+      dockerfile: Dockerfile
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - monitoring_network
+
+networks:
+  monitoring_network:

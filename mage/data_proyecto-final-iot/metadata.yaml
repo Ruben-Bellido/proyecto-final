@@ -53,3 +53,5 @@ notification_config:
   teams_config:
     webhook_url: "{{ env_var('MAGE_TEAMS_WEBHOOK_URL') }}"
 project_uuid: b3e0a790df8043a797340c3251c59694
+features:
+  display_local_timezone: true

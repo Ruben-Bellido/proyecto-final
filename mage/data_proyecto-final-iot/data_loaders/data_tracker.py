@@ -3,6 +3,8 @@ if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
+import csv
+import os
 from datetime import datetime, timezone
 import requests
 from bs4 import BeautifulSoup
@@ -76,16 +78,14 @@ def load_data_from_file(*args, **kwargs):
     bucket_list = [] # Lista de URLs de productos en Amazon
     data = [] # Lista de datos de cada producto
     
-    # Abre el archivo en modo lectura
-    with open('data_proyecto-final-iot/data_bucket.txt', 'r') as f:
-        lineas = f.readlines()
-        # Comprobar si hay líneas
-        if (lineas):
-            # Imprimir el número y el nombre de cada producto
-            for linea in lineas:
-                params = linea.strip().split('###')
-                if len(params) == 3:  # Asegurarse de que hay tres partes
-                    bucket_list.append(params[1]) # La URL es la segunda parte
+    # Si el archivo existe
+    if os.path.exists('data_proyecto-final-iot/data_bucket.csv'):
+        # Abre el archivo en modo lectura
+        with open('data_proyecto-final-iot/data_bucket.csv', 'r') as f:
+            reader = csv.reader(f)
+            next(reader)  # Saltar la cabecera
+            for row in reader:
+                bucket_list.append(row[1]) # La URL es la segunda parte
 
     # Por cada URL en la lista
     for url in bucket_list:
@@ -102,6 +102,10 @@ def load_data_from_file(*args, **kwargs):
         product_rating = get_product_rating(amazon_dom)
         product_reviews = get_product_reviews(amazon_dom)
 
+        # Obtener el hostname
+        with open('data_proyecto-final-iot/hostname', 'r') as file:
+            hostname = file.read().strip()
+
         # Agregar los datos al objeto JSON
         json_data = {
             "name": product_name,
@@ -109,6 +113,7 @@ def load_data_from_file(*args, **kwargs):
             "rating": product_rating,
             "reviews": product_reviews,
             "url": url,
+            "hostname": hostname,
             "timestamp": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
         }
 

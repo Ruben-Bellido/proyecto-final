@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Enlaces</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que quieres eliminar este producto?");
+        }
+    </script>
+</head>
+<body>
+    <h1>Gestión de productos de Amazon</h1>
+    <hr>
+
+    <h2>Añadir producto</h2>
+    <form method="POST" class="form-group">
+        <label for="url">URL del producto:</label><br>
+        <input type="text" id="url" name="url"><br>
+        <input type="submit" value="Agregar Enlace">
+    </form>
+    {% if error %}
+        <span class=error>Error: {{ error }}</span>
+    {% endif %}
+
+    <h2>Productos actualmente rastreados</h2>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>PRODUCTO</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for enlace in enlaces %}
+                <tr>
+                    <td>{{ enlace.id }}</td>
+                    <td><a href="{{ enlace.url }}">{{ enlace.name }}</a></td>
+                    <td>
+                        <a href="{{ url_for('eliminar', id=enlace.id) }}" onclick="return confirmarEliminacion()"><button class="eliminar-btn">Eliminar</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

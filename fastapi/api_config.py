@@ -25,6 +25,7 @@ class Product(BaseModel):
     rating: float
     reviews: int
     url: str
+    hostname: str
     timestamp: str
 
 # Publicar medidas del generador
@@ -32,9 +33,10 @@ class Product(BaseModel):
 async def post_product(product: Product):
     # Crear un punto para cada fila
     p = Point("products")
-    # Añadir el nombre y url del producto como tags
+    # Añadir el nombre y url del producto y nombre del host como tags
     p.tag("name", product.name)
     p.tag("url", product.url)
+    p.tag("hostname", product.hostname)
     # Añadir campos
     p.field("price", product.price)
     p.field("rating", product.rating)

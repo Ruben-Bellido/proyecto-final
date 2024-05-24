@@ -2,7 +2,7 @@
 FROM python:3.10
 
 # Definimos el directorio de trabajo en el contenedor
-WORKDIR /product_manager
+WORKDIR /manager_app
 
 # Copiamos el archivo requirements.txt al contenedor
 COPY requirements.txt .
@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "./bucket_manager.py"]
+CMD ["python", "./app.py"]

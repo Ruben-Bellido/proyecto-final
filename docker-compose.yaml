@@ -41,11 +41,28 @@ services:
       - 6789:6789
     volumes:
       - ./mage:/home/src/
+      - /etc/hostname:/home/src/${PROJECT_NAME}/hostname
     restart: on-failure:5
     networks:
       - monitoring_network
     depends_on:
       - fastapi
+
+  manager_app:
+    build:
+      context: manager_app
+      dockerfile: Dockerfile
+    container_name: manager_app
+    environment:
+      TZ: Europe/Madrid
+    ports:
+      - 5000:80
+    volumes:
+      - ./mage:/manager_app/data
+    networks:
+      - monitoring_network
+    depends_on:
+      - mage 
 
 networks:
   monitoring_network:

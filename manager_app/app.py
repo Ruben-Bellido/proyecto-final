@@ -71,12 +71,17 @@ def index():
                 error = 'La URL del producto es inválida. Se aceptan únicamente enlaces pertenecientes al dominio amazon.es.'
                 return render_template('index.html', enlaces=enlaces, error=error)
             
-            id = str(int(enlaces[-1]['id']) + 1)  # ID incremental
+            # ID incremental
+            if len(enlaces) > 0:
+                id = str(int(enlaces[-1]['id']) + 1)
+            else:
+                id = 1
+
             enlaces.append({'id': id, 'url': url, 'name': name})
             escribir_enlaces(enlaces)
             return redirect(url_for('index'))
+        # Si da un error
         except Exception:
-            # Si da un error 
             error = 'La URL del producto es inválida. Se aceptan únicamente enlaces pertenecientes al dominio amazon.es.'
             return render_template('index.html', enlaces=enlaces, error=error)
     else:

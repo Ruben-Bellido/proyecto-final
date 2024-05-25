@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for
 import csv
 import os
 import requests
@@ -65,12 +65,18 @@ def index():
             amazon_dom = et.HTML(str(soup))
             # Extraer el nombre del producto y el precio utilizando funciones definidas anteriormente
             name = get_product_name(amazon_dom)
+
+            # Si no se obtiene un nombre se muestra un error
+            if (name is None):
+                error = 'La URL del producto es inválida. Se aceptan únicamente enlaces pertenecientes al dominio amazon.es.'
+                return render_template('index.html', enlaces=enlaces, error=error)
             
             id = str(int(enlaces[-1]['id']) + 1)  # ID incremental
             enlaces.append({'id': id, 'url': url, 'name': name})
             escribir_enlaces(enlaces)
             return redirect(url_for('index'))
         except Exception:
+            # Si da un error 
             error = 'La URL del producto es inválida. Se aceptan únicamente enlaces pertenecientes al dominio amazon.es.'
             return render_template('index.html', enlaces=enlaces, error=error)
     else:

@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, constr
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
+from datetime import datetime
 
 # Inicializar FastAPI
 app = FastAPI()
@@ -18,15 +19,15 @@ client = InfluxDBClient(url=url, token=token, org=org)
 # Crear el objeto para escribir en la base de datos
 write_api = client.write_api(write_options=SYNCHRONOUS)
 
-# Clase que componen cada producto
+# Clase que compone cada producto
 class Product(BaseModel):
-    name: str
+    name: constr(min_length=1) = Field(..., description="El nombre no puede estar vacío")
     price: float = Field(gt=0, description="El precio ha de ser mayor a 0")
-    rating: float
-    reviews: int
-    url: str
-    hostname: str
-    timestamp: str
+    rating: float = Field(ge=0, le=5, description="La puntuación no puede ser negativa ni mayor que 5")
+    reviews: int = Field(ge=0, description="Las valoraciones no puede ser negativa")
+    url: constr(regex=r'^https://www\.amazon\.es/.*$') = Field(..., description="La URL debe comenzar con https://www.amazon.es")
+    hostname: constr(min_length=1) = Field(..., description="El nombre del host no puede estar vacío")
+    timestamp: datetime = Field(..., description="El timestamp debe tener un formato válido de fecha y hora")
 
 # Publicar medidas del generador
 @app.post("/products")

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Enlaces</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
     <script>
         function confirmarEliminacion() {
             return confirm("¿Estás seguro de que quieres eliminar este producto?");
@@ -12,6 +14,7 @@
     </script>
 </head>
 <body>
+
     <h1>Gestión de productos de Amazon</h1>
     <hr>
 
@@ -19,7 +22,7 @@
     <form method="POST" class="form-group">
         <label for="url">URL del producto:</label><br>
         <input type="text" id="url" name="url"><br>
-        <input type="submit" value="Agregar Enlace">
+        <input type="submit" value="Agregar">
     </form>
     {% if error %}
         <span class=error>Error: {{ error }}</span>

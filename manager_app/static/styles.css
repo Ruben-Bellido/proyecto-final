@@ -66,3 +66,26 @@ tr:nth-child(even) {
     margin: 4px 2px;
     cursor: pointer;
 }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header img {
+    height: 50px;
+}
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+.nav-buttons a {
+    text-decoration: double;
+    color: white;
+    background-color: #4CAF50;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.nav-buttons a:hover {
+    background-color: #0056b3;
+}

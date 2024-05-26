@@ -1,0 +1,1208 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 13,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 14,
+          "x": 0,
+          "y": 0
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT \"price\", \"time\" FROM \"products\"  WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND (\"name\" = '$name' AND \"hostname\" = '$hostname') ORDER BY \"time\" DESC",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "price",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "time",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "rating",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Precio $name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "$name",
+                "url": "${__data.fields.url}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "price"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Price"
+                },
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "rating"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Rating"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "reviews"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Reviews"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 4,
+          "x": 14,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.1.0-70903",
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT \"price\", \"rating\", \"reviews\", \"name\", \"url\" FROM \"products\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND (\"name\" = '$name' AND \"hostname\" = '$hostname') ORDER BY \"time\" DESC LIMIT 1",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "price",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "rating",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "reviews",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "name",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC",
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "8ab8a8bb-4567-489a-bcde-f18fab4aafdc",
+                    "properties": {
+                      "field": "name",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$name"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  },
+                  {
+                    "id": "b8a9baaa-4567-489a-bcde-f18faf125425",
+                    "properties": {
+                      "field": "hostname",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$hostname"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "b88a8aab-0123-4456-b89a-b18fab288111",
+                "type": "group"
+              },
+              "whereString": "(name = '$name' AND hostname = '$hostname')"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Ultimos valores del producto",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "price"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Price"
+                },
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "rating"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Rating"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "reviews"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Reviews"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 3,
+          "x": 18,
+          "y": 0
+        },
+        "id": 7,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.1.0-70903",
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT  max(price) as price, max(rating) as rating, max(reviews) as reviews\r\nFROM \"products\" \r\nWHERE \r\n\"time\" >= $__timeFrom \r\nAND \"time\" <= $__timeTo \r\nAND (\"name\" = '$name' \r\nAND \"hostname\" = '$hostname')\r\nAND (\"price\" IS NOT NULL)\r\nAND (\"rating\" IS NOT NULL)\r\nAND (\"reviews\" IS NOT NULL)",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "price",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "rating",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "reviews",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "name",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC",
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "8ab8a8bb-4567-489a-bcde-f18fab4aafdc",
+                    "properties": {
+                      "field": "name",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$name"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  },
+                  {
+                    "id": "b8a9baaa-4567-489a-bcde-f18faf125425",
+                    "properties": {
+                      "field": "hostname",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$hostname"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "b88a8aab-0123-4456-b89a-b18fab288111",
+                "type": "group"
+              },
+              "whereString": "(name = '$name' AND hostname = '$hostname')"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Maximos",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "$name",
+                "url": "${__data.fields.url}"
+              }
+            ],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "price"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Price"
+                },
+                {
+                  "id": "unit",
+                  "value": "currencyEUR"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "rating"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Rating"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "reviews"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Reviews"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 3,
+          "x": 21,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.1.0-70903",
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT min(price) as price, min(rating) as rating, min(reviews) as reviews\r\nFROM \"products\" \r\nWHERE \r\n\"time\" >= $__timeFrom \r\nAND \"time\" <= $__timeTo \r\nAND (\"name\" = '$name' \r\nAND \"hostname\" = '$hostname')\r\nAND (\"price\" IS NOT NULL)\r\nAND (\"rating\" IS NOT NULL)\r\nAND (\"reviews\" IS NOT NULL)",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "price",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "rating",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "reviews",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "name",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC",
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "8ab8a8bb-4567-489a-bcde-f18fab4aafdc",
+                    "properties": {
+                      "field": "name",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$name"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  },
+                  {
+                    "id": "b8a9baaa-4567-489a-bcde-f18faf125425",
+                    "properties": {
+                      "field": "hostname",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "$hostname"
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "b88a8aab-0123-4456-b89a-b18fab288111",
+                "type": "group"
+              },
+              "whereString": "(name = '$name' AND hostname = '$hostname')"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Mínimos",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 14,
+          "x": 0,
+          "y": 5
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT \"time\", \"rating\" FROM \"products\"  WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND (\"name\" = '$name' AND \"hostname\" = '$hostname') ORDER BY \"time\" DESC",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "price",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "time",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "rating",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Rating $name",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "influxdb",
+          "uid": "fdjmjipyzz56of"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic-by-name"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "reviews"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "dark-green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 14,
+          "x": 0,
+          "y": 9
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "dataset": "iox",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "fdjmjipyzz56of"
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT \"reviews\", \"time\" FROM \"products\" WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo AND (\"name\" = '$name' AND \"hostname\" = '$hostname') ORDER BY \"time\" DESC",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [
+                    {
+                      "name": "reviews",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                },
+                {
+                  "parameters": [
+                    {
+                      "name": "time",
+                      "type": "functionParameter"
+                    }
+                  ],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "orderBy": {
+                "property": {
+                  "name": "time",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "orderByDirection": "DESC",
+              "whereJsonTree": {
+                "children1": [
+                  {
+                    "id": "999b898b-89ab-4cde-b012-318faf26e0b1",
+                    "properties": {
+                      "field": "name",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "\"${name}\""
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  },
+                  {
+                    "id": "b89a8aa9-89ab-4cde-b012-318faf2741e1",
+                    "properties": {
+                      "field": "hostname",
+                      "fieldSrc": "field",
+                      "operator": "equal",
+                      "value": [
+                        "\"$hostname\""
+                      ],
+                      "valueSrc": [
+                        "value"
+                      ],
+                      "valueType": [
+                        "text"
+                      ]
+                    },
+                    "type": "rule"
+                  }
+                ],
+                "id": "a98b9bba-0123-4456-b89a-b18faf1ab65d",
+                "type": "group"
+              },
+              "whereString": "(name = '\\\"${name}\\\"' AND hostname = '\\\"$hostname\\\"')"
+            },
+            "table": "products"
+          }
+        ],
+        "title": "Reviews $name",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "ClaudiaPortatil",
+            "value": "ClaudiaPortatil"
+          },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdjmjipyzz56of"
+          },
+          "definition": "SELECT distinct hostname\nFROM \"products\"\n WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo ",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "hostname",
+          "options": [],
+          "query": "SELECT distinct hostname\nFROM \"products\"\n WHERE \"time\" >= $__timeFrom AND \"time\" <= $__timeTo ",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "2024 Nuevo Español TDT Decodificador TV DVB-T T2 H265 HEVC FTA Full HD PVR, USB, HDMI, SCART, Sintonizador de TV Digital Terrestre, Receptor Digital de Alta definición Full HD 1080p (1)",
+            "value": "2024 Nuevo Español TDT Decodificador TV DVB-T T2 H265 HEVC FTA Full HD PVR, USB, HDMI, SCART, Sintonizador de TV Digital Terrestre, Receptor Digital de Alta definición Full HD 1080p (1)"
+          },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdjmjipyzz56of"
+          },
+          "definition": "SELECT distinct name\nFROM \"products\"\nWHERE \n\"time\" >= $__timeFrom AND \"time\" <= $__timeTo and \nhostname == '$hostname'",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "name",
+          "options": [],
+          "query": "SELECT distinct name\nFROM \"products\"\nWHERE \n\"time\" >= $__timeFrom AND \"time\" <= $__timeTo and \nhostname == '$hostname'",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-12h",
+      "to": "now"
+    },
+    "timeRangeUpdatedDuringEditOrView": false,
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Productos",
+    "uid": "ddmovg1a9i60wa",
+    "version": 17,
+    "weekStart": ""
+  }

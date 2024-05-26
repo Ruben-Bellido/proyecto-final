@@ -12,15 +12,15 @@
         "type": "function",
         "z": "23367ebca52d19af",
         "name": "Datos sintéticos",
-        "func": "// Generar un número aleatorio en un rango específico\nfunction getRandomNumber(min, max) {\n    return Math.random()  * (max - min) + min;\n}\nvar product_name = \"Producto ejemplo IoT\"; // Potencia activa LV (kW)\nvar product_price = getRandomNumber(100, 250)/10; // Velocidad del viento (m/s)\nvar product_rating = getRandomNumber(0, 50)/10; // Curva de potencia teórica (KWh)\nvar product_reviews = Math.round(getRandomNumber(0, 600)); // Dirección del viento (°)\nvar url = \"https://www.amazon.es/Learn-IoT-Programming-Using-Node-RED/dp/9391392385/ref=sr_1_9?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1IJCGEL7DUA4P&dib=eyJ2IjoiMSJ9.fSFxGtOF3XXX40hGTcJHg6-owyHuO6tyPoDR-Uzg2KI-6vKOfo9NCDtvNWPX4dNbPFWtC29chBYBRYLcHSD02Y6Npe7B9RB-DiPk5T2IQVRt-SrX7lCg_6ITZV79fXItF-gnlUYFl3aEuzNxXO6x2ASn1pdMqAjMiSqQFS48ncCSRqw4kd1A5UDrO1oE9U6FjOfVBjuNT-lWG3SeDWRNqabgsQyYwoiUXODYP_RQ5Gy_xH2jNuJhZjyvW5c--h3RWmMKaS_GT8AuOY4PgDfrb4y93uWIeLxswmYXrMEirHk.rQs52eefILoFkOCHkza0J0d2x_xRsH4cmG66-bHf7Nc&dib_tag=se&keywords=iot+book&qid=1716656432&sprefix=iot+book%2Caps%2C92&sr=8-9\";\n// Obtener la marca de tiempo actual en formato ISO 8601 (UTC)\nvar timestamp = new Date().toISOString();\n\n// Construir el punto de datos\nvar contenido = \n    {\n        \"name\": product_name,\n        \"price\": product_price,\n        \"rating\": product_rating,\n        \"reviews\": product_reviews,\n        \"url\": url,\n        \"hostname\": \"Node-Red\",\n        \"timestamp\": timestamp\n        \n    }\n\n\n// Construir el comando de cURL\n// msg.payload = \"curl -X 'POST' 'http://127.0.0.1:8000/products' -H 'accept: application/json' -H 'Content-Type: application/json' -d '\" + JSON.stringify(contenido) + \"'\";\nmsg.payload = contenido;\n// Devolver el comando de cURL\nreturn msg;",
+        "func": "// Generar un número aleatorio en un rango específico\nfunction getRandomNumber(min, max) {\n    return Math.random()  * (max - min) + min;\n}\nvar product_name = \"Producto ejemplo IoT\"; // Nombre del producto\nvar product_price = getRandomNumber(100, 250)/10; // Precio \nvar product_rating = getRandomNumber(0, 50)/10; // Valoración\nvar product_reviews = Math.round(getRandomNumber(0, 600)); // Nº de reseñas\n// Dirección del producto\nvar url = \"https://www.amazon.es/Learn-IoT-Programming-Using-Node-RED/dp/9391392385/ref=sr_1_9?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1IJCGEL7DUA4P&dib=eyJ2IjoiMSJ9.fSFxGtOF3XXX40hGTcJHg6-owyHuO6tyPoDR-Uzg2KI-6vKOfo9NCDtvNWPX4dNbPFWtC29chBYBRYLcHSD02Y6Npe7B9RB-DiPk5T2IQVRt-SrX7lCg_6ITZV79fXItF-gnlUYFl3aEuzNxXO6x2ASn1pdMqAjMiSqQFS48ncCSRqw4kd1A5UDrO1oE9U6FjOfVBjuNT-lWG3SeDWRNqabgsQyYwoiUXODYP_RQ5Gy_xH2jNuJhZjyvW5c--h3RWmMKaS_GT8AuOY4PgDfrb4y93uWIeLxswmYXrMEirHk.rQs52eefILoFkOCHkza0J0d2x_xRsH4cmG66-bHf7Nc&dib_tag=se&keywords=iot+book&qid=1716656432&sprefix=iot+book%2Caps%2C92&sr=8-9\";\n// Obtener la marca de tiempo actual en formato ISO 8601 (UTC)\nvar timestamp = new Date().toISOString();\n// Construir el punto de datos\nvar contenido = \n    {\n        \"name\": product_name,\n        \"price\": product_price,\n        \"rating\": product_rating,\n        \"reviews\": product_reviews,\n        \"url\": url,\n        \"hostname\": \"Node-Red\",\n        \"timestamp\": timestamp        \n    }\n\n// Construir el comando de cURL\nmsg.payload = contenido;\n// Devolver el comando de cURL\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
-        "y": 200,
+        "x": 280,
+        "y": 240,
         "wires": [
             [
                 "beb680023834924f"
@@ -41,7 +41,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "2",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -49,7 +49,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 130,
-        "y": 140,
+        "y": 180,
         "wires": [
             [
                 "0b196f28a6f0f016"
@@ -69,8 +69,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
-        "y": 260,
+        "x": 580,
+        "y": 240,
         "wires": []
     },
     {
@@ -90,28 +90,11 @@
         "senderr": false,
         "headers": [],
         "x": 450,
-        "y": 260,
+        "y": 280,
         "wires": [
             [
                 "f54d75ee4b6ee045"
             ]
         ]
-    },
-    {
-        "id": "3a30c6e4d067e5e3",
-        "type": "debug",
-        "z": "23367ebca52d19af",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 660,
-        "y": 440,
-        "wires": []
     }
 ]

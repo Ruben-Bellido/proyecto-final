@@ -9,37 +9,30 @@ Este proyecto es un sistema que integra diferentes tecnologías con el objetivo 
 - Visualización y análisis de datos mediante la herramienta en la nube Grafana cloud. Pueden visualizarse gráficas de precio, puntuación y valoraciones a lo largo del tiempo, además de destacar los valores actuales.
 - Envío de datos de prueba a través de node-red. Mediante la ejecución de esta herramienta puede probarse el flujo de los datos a través de los diferentes procesos.
 
+## Configurar InfluxDB
+1. Asignar los parámetros designados a InfluxDB en el archivo .env.
+- Token
+- Url
+- Organización
+- Bucket
+2. En el caso de modificar estas variables se ha de configurar una instancia de Grafana adicionalmente (https://grafana.com/docs/grafana/latest/) y vincular esta a InfluxDB.
+
 ## Iniciar servicios
-1. Dirigirse a la raíz del proyecto
-2. Iniciar el docker compose: ```docker compose up -d```
+1. Dirigirse a la raíz del proyecto.
+2. Iniciar el docker compose: ```docker compose up -d```.
 
 ## Gestionar productos
 1. Dirigirse a la interfaz web localhost:5000
-2. Añadir productos: Introducir la URL del producto en la caja de texto y presionar el botón de agregar
-3. Eliminar productos: Presionar el botón de eliminar a la derecha del producto en cuestión, se ha de confirmar el mensaje emergente
+2. Añadir productos: Introducir la URL del producto en la caja de texto y presionar el botón de agregar.
+3. Eliminar productos: Presionar el botón de eliminar a la derecha del producto en cuestión, se ha de confirmar el mensaje emergente.
 4. Acceder a las diferentes aplicaciones con los links directos.
 
 ## Rastrear propiedades de los productos
-1. Dirigirse a Grafana cloud https://clauvperlado.grafana.net/, solo las personas añadidas al espacio pueden visualizar el dashboard.
+1. Dirigirse a Grafana Cloud
+- https://clauvperlado.grafana.net/, solo las personas añadidas al espacio pueden visualizar el dashboard.
+- Alternativamente configurar el conector a InfluxDB (siguiendo los pasos indicados en https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-influxdb/) y añadir el dashboard ubicado en el directorio /grafana.
 2. Dirigirse a los Dashboards y seleccionar el de Productos.
 3. Filtrar las visualizaciones mediante los selectores de nombre de producto o host.
 
 ## Cerrar servicios
-1. Apagar el docker compose: ```docker compose down```
-
-## Librerías
-Abrir grafana, dashboard ejemplo: https://clauvperlado.grafana.net/goto/LPiF9NBIR?orgId=1
-
-## Recursos
-FastAPI body fields para comprobar datos:
-https://fastapi.tiangolo.com/tutorial/body-fields/#__tabbed_1_1
-
-https://www.amazon.es/Angles-Horn-Tocadiscos-Bluetooth-preamplificador/dp/B09CRJ4CB3/?_encoding=UTF8&_encoding=UTF8&ref_=dlx_deals_sc_dcl_img_dt_dealz_m1&pd_rd_w=Klvc1&content-id=amzn1.sym.e45ac59e-9108-446a-aadb-27a97420a75d&pf_rd_p=e45ac59e-9108-446a-aadb-27a97420a75d&pf_rd_r=1CMRY1PH8G29RCW4M3FC&pd_rd_wg=GzeDn&pd_rd_r=a95c7e3c-c007-4cab-8aed-cf21b6ebc140
-
-Conectar fast api a influxdb:
-https://levelup.gitconnected.com/recording-time-series-data-via-apis-influxdb-fastapi-d5ba29fb6f18
-
-# Bibliografía
-«Recording Time Series Data Via APIs: InfluxDB + FastAPI | by Alex | Level Up Coding». Accedido 23 de abril de 2024. https://levelup.gitconnected.com/recording-time-series-data-via-apis-influxdb-fastapi-d5ba29fb6f18?gi=025a9f1d51d1.
-«Request Body - FastAPI». Accedido 23 de abril de 2024. https://fastapi.tiangolo.com/tutorial/body/.
-«Use Grafana to query and visualize data stored in InfluxDB | InfluxDB Cloud Serverless Documentation». Accedido 23 de abril de 2024. https://docs.influxdata.com/influxdb/cloud-serverless/process-data/visualize/grafana/?_gl=1*1htdgyg*_ga*MTgzNjAxNTc1MC4xNzAwODIyODc5*_ga_CNWQ54SDD8*MTcxMzg5NTczMC44LjEuMTcxMzg5NTc0OC40Mi4wLjU3NzAyNDgwMw..
+1. Apagar el docker compose: ```docker compose down```.

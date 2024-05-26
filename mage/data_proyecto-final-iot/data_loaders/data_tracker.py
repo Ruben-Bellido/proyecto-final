@@ -87,6 +87,10 @@ def load_data_from_file(*args, **kwargs):
             for row in reader:
                 bucket_list.append(row[1]) # La URL es la segunda parte
 
+    # Obtener el nombre del host
+    with open('data_proyecto-final-iot/hostname', 'r') as file:
+        hostname = file.read().strip()
+
     # Por cada URL en la lista
     for url in bucket_list:
         # Realizar una solicitud HTTP a la URL
@@ -101,10 +105,6 @@ def load_data_from_file(*args, **kwargs):
         product_price = get_product_price(amazon_dom)
         product_rating = get_product_rating(amazon_dom)
         product_reviews = get_product_reviews(amazon_dom)
-
-        # Obtener el hostname
-        with open('data_proyecto-final-iot/hostname', 'r') as file:
-            hostname = file.read().strip()
 
         # Agregar los datos al objeto JSON
         json_data = {

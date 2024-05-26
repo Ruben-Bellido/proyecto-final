@@ -1,0 +1,1 @@
+2024-05-26T12:00:07 {"block_run_id": 83, "block_uuid": "data_tracker", "pipeline_run_id": 42, "pipeline_schedule_id": 1, "pipeline_uuid": "amazon_tracker", "hostname": "d30b4151a3d9", "block_type": "data_loader", "level": "INFO", "message": "Start executing block with BlockExecutor.", "timestamp": 1716710407.358468, "uuid": "9a3e0899e87d4afc93c4f7582b871f18"}

@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, constr
 from influxdb_client import InfluxDBClient, Point, WritePrecision
@@ -8,7 +9,7 @@ from datetime import datetime
 app = FastAPI()
 
 # Definir parámetros de la conexión a base de datos
-url = "https://eu-central-1-1.aws.cloud2.influxdata.com/"
+url = os.getenv('INFLUX_URL')
 token = "A1hkiA517pl-fA9RnY-9hy2-PnZU6nIlGEibeJvQNsb3QTQbJx_KiTbWlo7FzZCNMewZDgJxtsUV5tIukmNRcQ=="
 org = "R&C"
 bucket = "amazon_products"

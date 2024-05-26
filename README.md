@@ -17,17 +17,18 @@ Este proyecto es un sistema que integra diferentes tecnologías con el objetivo 
 1. Dirigirse a la interfaz web localhost:5000
 2. Añadir productos: Introducir la URL del producto en la caja de texto y presionar el botón de agregar
 3. Eliminar productos: Presionar el botón de eliminar a la derecha del producto en cuestión, se ha de confirmar el mensaje emergente
+4. Acceder a las diferentes aplicaciones con los links directos.
 
 ## Rastrear propiedades de los productos
-1. Dirigirse a Grafana cloud https://clauvperlado.grafana.net/
-2. Dirigirse a los Dashboards y seleccionar el de Productos
-3. Filtrar las visualizaciones mediante los selectores de nombre de producto o host
+1. Dirigirse a Grafana cloud https://clauvperlado.grafana.net/, solo las personas añadidas al espacio pueden visualizar el dashboard.
+2. Dirigirse a los Dashboards y seleccionar el de Productos.
+3. Filtrar las visualizaciones mediante los selectores de nombre de producto o host.
 
 ## Cerrar servicios
 1. Apagar el docker compose: ```docker compose down```
 
 ## Librerías
-abrir grafana, dashboard ejemplo: https://clauvperlado.grafana.net/goto/LPiF9NBIR?orgId=1
+Abrir grafana, dashboard ejemplo: https://clauvperlado.grafana.net/goto/LPiF9NBIR?orgId=1
 
 ## Recursos
 FastAPI body fields para comprobar datos:
